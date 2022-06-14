@@ -16,12 +16,23 @@ module.exports = (sequelize, DataTypes) => {
     idade: DataTypes.INTEGER,
     cpf: DataTypes.STRING,
     rg: DataTypes.STRING,
-    data_nasc: DataTypes.DATEONLY,
+    data_nasc: {
+      type: DataTypes.DATEONLY,
+      set(value){
+        let splitValue = value.split('\/');
+        this.setDataValue('data_nasc', `${splitValue[2]}-${splitValue[1]}-${splitValue[0]}`);
+      }
+    },
     sexo: DataTypes.STRING,
     signo: DataTypes.STRING,
     mae: DataTypes.STRING,
     pai: DataTypes.STRING,
-    email: DataTypes.STRING,
+    email:  {
+      type: DataTypes.STRING,
+      validate: {
+        isEmail: true
+      }
+    },
     senha: DataTypes.STRING,
     cep: DataTypes.STRING,
     endereco: DataTypes.STRING,

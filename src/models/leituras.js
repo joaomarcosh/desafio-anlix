@@ -20,7 +20,13 @@ module.exports = (sequelize, DataTypes) => {
   }
   Leituras.init({
     paciente_id: DataTypes.INTEGER,
-    data: DataTypes.DATE,
+    data: {
+      type: DataTypes.DATE,
+      set(value){
+        let realDate = new Date(value*1000);
+        this.setDataValue('data', realDate.toJSON());
+      }
+    },
     tipo_id: DataTypes.INTEGER,
     valor: DataTypes.FLOAT
   }, {
