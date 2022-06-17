@@ -6,8 +6,7 @@ class LeituraController {
     static async pegaLeituras(req,res) {
         try {
             const {dataInicial,dataFinal,data} = req.query;
-            const where = {};
-            let leituras;
+            let where = {};
 
             //Consultar para um intervalo de datas (dia, mês e ano), todas as 
             //características existentes de todos os pacientes da base de dados;
@@ -15,19 +14,17 @@ class LeituraController {
                 where.data = {};
                 dataInicial ? where.data[Op.gte] = dataInicial : null;
                 dataFinal ? where.data[Op.lte] = dataFinal : null;
-                leituras = await db.Leituras.findAll({where});
 
             //Consultar para uma determinada data (dia, mês e ano), todas as 
             //características existentes de todos os pacientes da base de dados;
             } else if (data) {
-                leituras = await db.sequelize.query(
-                    `SELECT * FROM "Leituras" WHERE date("data") = '${data}' ORDER BY paciente_id ASC`,
-                    {type: db.sequelize.QueryTypes.SELECT});
-
-            } else {
-                leituras = await db.Leituras.findAll();
+                where = db.sequelize.where(
+                    db.sequelize.fn('date', db.sequelize.col('data')),
+                    `${data}`
+                )
             }
 
+            const leituras = await db.Leituras.findAll({where});
             return res.status(200).json(leituras);
         } catch(erro) {
             return res.status(500).json({erro: erro.message});

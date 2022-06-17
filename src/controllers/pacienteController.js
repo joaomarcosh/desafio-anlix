@@ -7,8 +7,15 @@ class PacienteController {
     static async pegaPacientes(req,res) {
         try {
             const { nome } = req.query;
-            const where = {};
-            nome ? where.nome = {[Op.substring] : nome} : null;
+            let where = {};
+            if (nome) {
+                where = db.sequelize.where(
+                    db.sequelize.fn('lower', db.sequelize.col('nome')),
+                    {
+                        [Op.like]: db.sequelize.fn('lower', `%${nome}%`)
+                    }
+                )
+            }
             const pacientes = await db.Pacientes.findAll({where});
             return res.status(200).json(pacientes);
         } catch(erro) {
