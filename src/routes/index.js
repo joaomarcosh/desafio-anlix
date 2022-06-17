@@ -27,6 +27,10 @@ routes
 
 routes
     .get('/leituras', LeituraController.pegaLeituras)
+    .get('/leituras/recentes/:paciente_id/:tipo_id',LeituraController.pegaLeiturasRecentesParaUmPorTipo)
+    .get('/leituras/recentes',LeituraController.pegaLeiturasRecentesParaTodos)
+    .get('/leituras/recentes/:id',LeituraController.pegaLeiturasRecentesParaUm)
+    .get('/leituras/:paciente_id/:tipo_id',LeituraController.pegaLeiturasParaUmPorTipo)
     .get('/leituras/:id', LeituraController.pegaLeitura)
     .post('/leituras', LeituraController.criaLeitura)
     .put('/leituras/:id', LeituraController.atualizaLeitura)

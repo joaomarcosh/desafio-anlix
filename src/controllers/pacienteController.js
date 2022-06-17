@@ -1,10 +1,15 @@
 const db = require('../models');
+const { Op } = require('sequelize');
 
 class PacienteController {
 
+    //Consultar pacientes que contenham um nome ou parte de um nome a ser especificado na chamada da API.
     static async pegaPacientes(req,res) {
         try {
-            const pacientes = await db.Pacientes.findAll();
+            const { nome } = req.query;
+            const where = {};
+            nome ? where.nome = {[Op.substring] : nome} : null;
+            const pacientes = await db.Pacientes.findAll({where});
             return res.status(200).json(pacientes);
         } catch(erro) {
             return res.status(500).json({erro: erro.message});
