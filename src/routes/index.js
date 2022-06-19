@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const path = require('path');
 
 const routes = Router();
 
@@ -6,9 +7,10 @@ const PacienteController = require('../controllers/PacienteController')
 const TipoController = require('../controllers/TipoController')
 const LeituraController = require('../controllers/LeituraController')
 
-routes.get("/",(req,res) => {
-  res.status(200).json({ mensagem: "👍" });
-})
+routes
+    .get('/', (req,res) => {
+      res.sendFile(path.join(__dirname,'../page/index.html'))
+    });
 
 routes
     .get('/pacientes', PacienteController.pegaPacientes)
@@ -16,7 +18,6 @@ routes
     .post('/pacientes', PacienteController.criaPaciente)
     .put('/pacientes/:id', PacienteController.atualizaPaciente)
     .delete('/pacientes/:id', PacienteController.apagaPaciente)
-    
 
 routes
     .get('/tipos', TipoController.pegaTipos)
