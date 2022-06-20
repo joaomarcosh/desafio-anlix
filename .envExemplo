@@ -1,0 +1,5 @@
+PG_username = 
+PG_password = 
+PG_database = 
+PG_host = 127.0.0.1
+PORT = 3000
