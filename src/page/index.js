@@ -22,6 +22,11 @@ function pegaPacientes() {
         .then(res => res.json())
         .then(dados => {
             let innerHtml = ``;
+			dados.sort((a,b) => {
+				if (a.nome < b.nome) return -1;
+				if (a.nome > b.nome) return 1;
+				return 0;
+			});
             for (let i=0;i<dados.length;i++) {
                 const paciente = dados[i].nome;
                 innerHtml += `<option value="${paciente}">\n`
