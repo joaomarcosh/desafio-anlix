@@ -3,6 +3,3 @@ node_modules
 TODO.txt
 nodemon.json
 .env
-.dockerignore
-Dockerfile
-docker-compose.yml
