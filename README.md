@@ -1,40 +1,100 @@
 # Desafio Anlix
+Repositório onde foi feita a implementação do [desafio](https://github.com/anlix-io/desafio-anlix) proposto pela **anlix-io**.
+Este projeto foi desenvolvido com Node.js para implementar uma base de dados Postgres utilizando a biblioteca Sequelize como ORM.
 
-**Sobre o desafio**
+**Status do Projeto** : Finalizado
 
-Os arquivos texto localizados no diretório dados apresentam diversas características sobre pacientes terminais internados em um hospital, que  são fornecidos por áreas distintas e sempre serão fornecidos separadamente. Os arquivos texto fornecidos por uma mesma área estão nomeados com datas distintas, pois retratam características dos pacientes em diferentes dias. Precisamos que você crie um software que contenha uma base de dados consultável através de uma API REST capaz de:
+![Badge](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
 
-* Consultar, para cada paciente, cada uma das características individualmente e cada uma delas sendo a mais recente disponível;
-* Consultar em uma única chamada, todas as características de um paciente, com os valores mais recentes de cada uma;
-* Consultar para uma determinada data (dia, mês e ano), todas as características existentes de todos os pacientes da base de dados;
-* Consultar uma característica qualquer de um paciente para um intervalo de datas a ser especificado na chamada da API;
-* Consultar o valor mais recente de uma característica de um paciente que esteja entre um intervalo de valores a ser especificado na chamada da API;
-* Consultar pacientes que contenham um nome ou parte de um nome a ser especificado na chamada da API.
+## Tabela de Conteúdo
 
-Além disso, precisamos que algumas informações estejam disponíveis em uma interface web. É importante ressaltar que o diretor do hospital necessita exibir essa interface para todos os investidores da instituição e também para o corpo de médicos. Os requisitos são os seguintes:
+1. [Requisitos](#requisitos)
+2. [Instalação](#instalação)
+3. [Configuração](#configuração)
+4. [Uso](#uso)
+5. [Arquitetura](#arquitetura)
+6. [Funcionalidades](#funcionalidades)
+7. [Endpoints](#endpoints)
 
-* Buscar um paciente por nome e exibir o valor mais recente de cada uma de suas características;
-* Ser possível exportar as características de um ou mais pacientes de todas as datas disponíveis para um arquivo CSV;
-* Exibir um gráfico temporal para um determinado paciente e uma determinada característica a ser inserida através da interface.
+## Requisitos
+Para rodar este projeto é necessário ter instalados o **nodejs**, **npm** e algum banco de dados entre **PotgreSQL**, **MariaDB**, **MySQL** e **SQLite**.
 
-**Observações**
+## Instalação
+- Repositório Git
+  *Clone o repositorio*
+``` bash
+$ git clone https://github.com/joaomarcosh/desafio-anlix
+```
+- Dependências
+  *Instale as dependências necessárias*
+``` bash
+$ npm install
+```
 
-* Os arquivos fornecidos representam apenas uma pequena amostra de dezenas de milhares de pacientes que este hospital atendeu nos últimos 50 anos. O software desenvolvido deve ser capaz de lidar com todos esses dados. 
+## Configuração
+*No backend, temos que criar um banco de dados para a nossa aplicação, assim como configurar o arquivo ```.env```.* 
+*Além disso, também é necessário migrar e seedar os dados para o banco de dados.*
+*Segue o passo a passo.*
 
-* O gerente de projetos Celso Carrasco de nossa empresa de software precisa de um prazo máximo de entrega de 7 dias corridos. Iremos observar a data de cada commit. Desenvolva os itens mais pertinentes em sua avaliação caso não haja tempo suficiente para concluir todos os itens.
+- Banco de dados
+  *Abaixo são apresentados os comandos para criar uma base de dados Postgres.*
 
-* Instruções no arquivo README.md de como executar seu projeto são importantes. Conteinerização será muito bem vinda.
+- *Comandos no bash.*
+```
+$ createdb <nome_do_banco>;
+```
+-  *Comandos no psql*
+```
+$ CREATE DATABASE <nome_do_banco>;
+```
 
-* Faça commits em inglês mostrando a evolução do projeto.
+- Crie o arquivo ```.env```
+  *Copie o conteudo do arquivo de exemplo ```.envExemplo``` e renomeie para ```.env```*
 
-**Como o desafio deve ser entregue?**
+- Configure o arquivo ```.env```
+  *Adicione as informações necessárias para o backend rodar*
+``` text
+DB_username = <nome_usuario>
+DB_password = <senha>
+DB_database = <nome_do_banco>
+DB_host = 127.0.0.1
+DB_dialect = <tipo_do_banco> # postgres || mysql || mariadb || sqlite
+PORT = 3000
+```
 
-Submeta o código desenvolvido através de um repositório no Github e compartilhe com a Anlix seu desenvolvimento. Se preferir, faça um fork deste projeto no próprio Github.
+## Uso
+*Para rodar o projeto a partir do terminal, siga as instruções*
 
-**Posso tirar dúvidas?**
+``` bash
+$ node src/server.js
+```
 
-Sim, claro! Estaremos disponíveis através do usuário no Telegram @anlixdevduvidas
+Para criar e popular as tabelas, use o argumento ```-S```
 
-**Em qual linguagem deve ser feito o desenvolvimento? Alguma tecnologia específica? Posso usar um framework? Qual banco de dados devo usar?**
+```bash
+$ node src/server.js -S
+```
 
-Seja livre para voar.
+*Por fim, abra a URL ```localhost:PORT```, onde ```PORT``` é a porta definida no arquivo ```.env``` (padrão 3000), no browser de escolha.*
+
+## Arquitetura
+- O banco de dados conta com três tabelas: **Pacientes**, **Leituras** e **Tipos_Leituras**. As tabelas **Pacientes** e **Tipos_Leituras** possuem uma relação one-to-many com a tabela **Leituras**, de forma que um paciente e um tipo de leitura pode possuir n leituras, e uma leitura só pode estar associada a um único paciente e um único tipo de leitura;
+
+![](https://i.imgur.com/rS4CGwq.png)
+
+- Para popular o banco de dados, foi criado um **Seeder**. O Seeder primeiro faz um BULK INSERT dos dados dos pacientes, contidos em um único arquivo JSON, na tabela **Pacientes**. Após os pacientes é feita a criação dos tipos de leituras a partir do nome dos diretórios onde os arquivos de leituras estão inseridos. Por fim, para popular a tabela de leituras, o Seeder percorre todos os arquivos nos diretórios e faz um ```SELECT``` para cada leitura a fim de encontrar o ID do paciente e fazer a inserção dos dados na tabela.
+
+## Funcionalidades
+- [x] Consultar, para cada paciente, cada uma das características individualmente e cada uma delas sendo a mais recente disponível;
+- [x] Consultar em uma única chamada, todas as características de um paciente, com os valores mais recentes de cada uma;
+- [x] Consultar para uma determinada data (dia, mês e ano), todas as características existentes de todos os pacientes da base de dados;
+- [x] Consultar uma característica qualquer de um paciente para um intervalo de datas a ser especificado na chamada da API;
+- [x] Consultar o valor mais recente de uma característica de um paciente que esteja entre um intervalo de valores;
+- [x] Consultar pacientes que contenham um nome ou parte de um nome a ser especificado na chamada da API;
+- [x] Buscar um paciente por nome e exibir o valor mais recente de cada uma de suas características;
+- [x] Ser possível exportar as características de um ou mais pacientes de todas as datas disponíveis para um arquivo CSV;
+- [x] Exibir um gráfico temporal para um determinado paciente e uma determinada característica a ser inserida através da interface.
+
+## Endpoints
+
+O projeto contém um arquivo chamado Desafio-Anlix.postman_collection para importar uma coleção de endpoints no programa Postman.

@@ -1,0 +1,621 @@
+{
+	"info": {
+		"_postman_id": "69f92364-3526-426e-924b-6d7af12112df",
+		"name": "Desafio-Anlix",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Pacientes",
+			"item": [
+				{
+					"name": "Pega todos pacientes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/pacientes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"pacientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pega pacientes por nome",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/pacientes?nome=Alexandre",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"pacientes"
+							],
+							"query": [
+								{
+									"key": "nome",
+									"value": "Alexandre"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pega um paciente",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/pacientes/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"pacientes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cria um paciente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Alexandre Caleb Costa\",\r\n    \"idade\": 55,\r\n    \"cpf\": \"1\",\r\n    \"rg\": \"1\",\r\n    \"data_nasc\": \"1967-01-19\",\r\n    \"sexo\": \"Masculino\",\r\n    \"signo\": \"Capricórnio\",\r\n    \"mae\": \"Beatriz Alícia\",\r\n    \"pai\": \"Nelson Heitor Costa\",\r\n    \"email\": \"aalexandrecaledfbcosfhta@loreal.com\",\r\n    \"senha\": \"6eXIFok6iQ\",\r\n    \"cep\": \"69309-415\",\r\n    \"endereco\": \"Rua das Palmas de Santa Rita\",\r\n    \"numero\": 765,\r\n    \"bairro\": \"Pricumã\",\r\n    \"cidade\": \"Boa Vista\",\r\n    \"estado\": \"RR\",\r\n    \"telefone_fixo\": \"(95) 3783-9661\",\r\n    \"celular\": \"(95) 99359-1588\",\r\n    \"altura\": \"1,96\",\r\n    \"peso\": 63,\r\n    \"tipo_sanguineo\": \"A-\",\r\n    \"cor\": \"laranja\",\r\n    \"createdAt\": \"2022-06-13T13:12:39.190Z\",\r\n    \"updatedAt\": \"2022-06-13T13:12:39.190Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/pacientes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"pacientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualiza um paciente",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"teste\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/pacientes/61",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"pacientes",
+								"61"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deleta um paciente",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/pacientes/61",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"pacientes",
+								"61"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tipos de Leituras",
+			"item": [
+				{
+					"name": "Pega todos tipos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/tipos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tipos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pega um tipo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/tipos/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tipos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cria um tipo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"descr_tipo\": \"indice_vascular\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/tipos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tipos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualiza um tipo",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"descr_tipo\": \"indice_cerebral\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/tipos/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tipos",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deleta um tipo (no cascade)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/tipos/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tipos",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Leituras",
+			"item": [
+				{
+					"name": "Pega todas leituras",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/leituras",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"leituras"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pega uma leitura",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/leituras/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"leituras",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cria uma leitura",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"paciente_id\": 1,\r\n    \"data\": 1622563699,\r\n    \"tipo_id\": 1,\r\n    \"valor\": 0.392114\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/leituras",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"leituras"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualiza uma leitura",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"data\": 1649519029\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/leituras/12001",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"leituras",
+								"12001"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deleta uma leitura",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/leituras/12001",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"leituras",
+								"12001"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pega Leituras recentes para todos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/leituras/recentes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"leituras",
+								"recentes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pega Leituras recentes para um",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/leituras/recentes/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"leituras",
+								"recentes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pega Leituras para data específica",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/leituras?data=2021-03-12",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"leituras"
+							],
+							"query": [
+								{
+									"key": "data",
+									"value": "2021-03-12"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pega Leituras para intervalo de data",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/leituras?dataInicial=2021-04-03&dataFinal=2021-04-04",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"leituras"
+							],
+							"query": [
+								{
+									"key": "dataInicial",
+									"value": "2021-04-03"
+								},
+								{
+									"key": "dataFinal",
+									"value": "2021-04-04"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pega Leituras para paciente e tipo por intervalo de data",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/leituras/1/1?dataInicial=2021-03-12&dataFinal=2021-03-15",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"leituras",
+								"1",
+								"1"
+							],
+							"query": [
+								{
+									"key": "dataInicial",
+									"value": "2021-03-12"
+								},
+								{
+									"key": "dataFinal",
+									"value": "2021-03-15"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pega todas leituras para um paciente por tipo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/leituras/1/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"leituras",
+								"1",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pega Leitura Recente para paciente e tipo por intervalo de valor",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/leituras/recentes/1/1?valorInicial=0.3&valorFinal=0.6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"leituras",
+								"recentes",
+								"1",
+								"1"
+							],
+							"query": [
+								{
+									"key": "valorInicial",
+									"value": "0.3"
+								},
+								{
+									"key": "valorFinal",
+									"value": "0.6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pega Leituras recentes por nome",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/leituras/recentes?nome=Caio",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"leituras",
+								"recentes"
+							],
+							"query": [
+								{
+									"key": "nome",
+									"value": "Caio"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Página Inicial",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
