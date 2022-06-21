@@ -2,5 +2,5 @@ DB_username =
 DB_password = 
 DB_database = 
 DB_host = 127.0.0.1
-DB_dialect = postgres # postgres || mysql || mariadb || sqlite
+DB_dialect = postgres
 PORT = 3000

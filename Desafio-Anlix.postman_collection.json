@@ -14,13 +14,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/pacientes",
+							"raw": "http://localhost:3000/api/pacientes",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"pacientes"
 							]
 						}
@@ -33,13 +34,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/pacientes?nome=Alexandre",
+							"raw": "http://localhost:3000/api/pacientes?nome=Alexandre",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"pacientes"
 							],
 							"query": [
@@ -58,13 +60,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/pacientes/1",
+							"raw": "http://localhost:3000/api/pacientes/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"pacientes",
 								"1"
 							]
@@ -87,13 +90,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/pacientes",
+							"raw": "http://localhost:3000/api/pacientes",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"pacientes"
 							]
 						}
@@ -115,13 +119,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/pacientes/61",
+							"raw": "http://localhost:3000/api/pacientes/61",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"pacientes",
 								"61"
 							]
@@ -135,13 +140,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/pacientes/61",
+							"raw": "http://localhost:3000/api/pacientes/61",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"pacientes",
 								"61"
 							]
@@ -160,13 +166,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/tipos",
+							"raw": "http://localhost:3000/api/tipos",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"tipos"
 							]
 						}
@@ -179,13 +186,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/tipos/1",
+							"raw": "http://localhost:3000/api/tipos/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"tipos",
 								"1"
 							]
@@ -208,13 +216,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/tipos",
+							"raw": "http://localhost:3000/api/tipos",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"tipos"
 							]
 						}
@@ -236,13 +245,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/tipos/3",
+							"raw": "http://localhost:3000/api/tipos/3",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"tipos",
 								"3"
 							]
@@ -256,13 +266,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/tipos/3",
+							"raw": "http://localhost:3000/api/tipos/3",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"tipos",
 								"3"
 							]
@@ -281,13 +292,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/leituras",
+							"raw": "http://localhost:3000/api/leituras",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"leituras"
 							]
 						}
@@ -300,13 +312,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/leituras/1",
+							"raw": "http://localhost:3000/api/leituras/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"leituras",
 								"1"
 							]
@@ -329,13 +342,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/leituras",
+							"raw": "http://localhost:3000/api/leituras",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"leituras"
 							]
 						}
@@ -357,13 +371,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/leituras/12001",
+							"raw": "http://localhost:3000/api/leituras/12001",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"leituras",
 								"12001"
 							]
@@ -377,13 +392,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/leituras/12001",
+							"raw": "http://localhost:3000/api/leituras/12001",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"leituras",
 								"12001"
 							]
@@ -397,13 +413,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/leituras/recentes",
+							"raw": "http://localhost:3000/api/leituras/recentes",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"leituras",
 								"recentes"
 							]
@@ -417,13 +434,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/leituras/recentes/1",
+							"raw": "http://localhost:3000/api/leituras/recentes/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"leituras",
 								"recentes",
 								"1"
@@ -438,13 +456,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/leituras?data=2021-03-12",
+							"raw": "http://localhost:3000/api/leituras?data=2021-03-12",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"leituras"
 							],
 							"query": [
@@ -463,13 +482,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/leituras?dataInicial=2021-04-03&dataFinal=2021-04-04",
+							"raw": "http://localhost:3000/api/leituras?dataInicial=2021-04-03&dataFinal=2021-04-04",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"leituras"
 							],
 							"query": [
@@ -492,13 +512,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/leituras/1/1?dataInicial=2021-03-12&dataFinal=2021-03-15",
+							"raw": "http://localhost:3000/api/leituras/1/1?dataInicial=2021-03-12&dataFinal=2021-03-15",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"leituras",
 								"1",
 								"1"
@@ -523,13 +544,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/leituras/1/1",
+							"raw": "http://localhost:3000/api/leituras/1/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"leituras",
 								"1",
 								"1"
@@ -544,13 +566,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/leituras/recentes/1/1?valorInicial=0.3&valorFinal=0.6",
+							"raw": "http://localhost:3000/api/leituras/recentes/1/1?valorInicial=0.3&valorFinal=0.6",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"leituras",
 								"recentes",
 								"1",
@@ -576,13 +599,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/leituras/recentes?nome=Caio",
+							"raw": "http://localhost:3000/api/leituras/recentes?nome=Caio",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"leituras",
 								"recentes"
 							],

@@ -1,4 +1,4 @@
-const db = require("../models");
+const db = require("../src/models");
 const pacientes = require("./dados/pacientes.json");
 const path = require("path");
 const fs = require("fs");

@@ -13,28 +13,28 @@ routes
     });
 
 routes
-    .get('/pacientes', PacienteController.pegaPacientes)
-    .get('/pacientes/:id', PacienteController.pegaPaciente)
-    .post('/pacientes', PacienteController.criaPaciente)
-    .put('/pacientes/:id', PacienteController.atualizaPaciente)
-    .delete('/pacientes/:id', PacienteController.apagaPaciente)
+    .get('/api/pacientes', PacienteController.pegaPacientes)
+    .get('/api/pacientes/:id', PacienteController.pegaPaciente)
+    .post('/api/pacientes', PacienteController.criaPaciente)
+    .put('/api/pacientes/:id', PacienteController.atualizaPaciente)
+    .delete('/api/pacientes/:id', PacienteController.apagaPaciente)
 
 routes
-    .get('/tipos', TipoController.pegaTipos)
-    .get('/tipos/:id', TipoController.pegaTipo)
-    .post('/tipos', TipoController.criaTipo)
-    .put('/tipos/:id', TipoController.atualizaTipo)
-    .delete('/tipos/:id', TipoController.apagaTipo)
+    .get('/api/tipos', TipoController.pegaTipos)
+    .get('/api/tipos/:id', TipoController.pegaTipo)
+    .post('/api/tipos', TipoController.criaTipo)
+    .put('/api/tipos/:id', TipoController.atualizaTipo)
+    .delete('/api/tipos/:id', TipoController.apagaTipo)
 
 routes
-    .get('/leituras', LeituraController.pegaLeituras)
-    .get('/leituras/recentes/:paciente_id/:tipo_id',LeituraController.pegaLeiturasRecentesParaUmPorTipo)
-    .get('/leituras/recentes',LeituraController.pegaLeiturasRecentesParaTodos)
-    .get('/leituras/recentes/:id',LeituraController.pegaLeiturasRecentesParaUm)
-    .get('/leituras/:paciente_id/:tipo_id',LeituraController.pegaLeiturasParaUmPorTipo)
-    .get('/leituras/:id', LeituraController.pegaLeitura)
-    .post('/leituras', LeituraController.criaLeitura)
-    .put('/leituras/:id', LeituraController.atualizaLeitura)
-    .delete('/leituras/:id', LeituraController.apagaLeitura)
+    .get('/api/leituras', LeituraController.pegaLeituras)
+    .get('/api/leituras/recentes/:paciente_id/:tipo_id',LeituraController.pegaLeiturasRecentesParaUmPorTipo)
+    .get('/api/leituras/recentes',LeituraController.pegaLeiturasRecentesParaTodos)
+    .get('/api/leituras/recentes/:id',LeituraController.pegaLeiturasRecentesParaUm)
+    .get('/api/leituras/:paciente_id/:tipo_id',LeituraController.pegaLeiturasParaUmPorTipo)
+    .get('/api/leituras/:id', LeituraController.pegaLeitura)
+    .post('/api/leituras', LeituraController.criaLeitura)
+    .put('/api/leituras/:id', LeituraController.atualizaLeitura)
+    .delete('/api/leituras/:id', LeituraController.apagaLeitura)
 
 module.exports = routes;

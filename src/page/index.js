@@ -18,7 +18,7 @@ pegaTipos();
 criaGrafico();
 
 function pegaPacientes() {
-    fetch(`http://localhost:3000/pacientes`)
+    fetch(`http://localhost:3000/api/pacientes`)
         .then(res => res.json())
         .then(dados => {
             let innerHtml = ``;
@@ -36,7 +36,7 @@ function pegaPacientes() {
 }
 
 function pegaTipos() {
-    fetch(`http://localhost:3000/tipos`)
+    fetch(`http://localhost:3000/api/tipos`)
         .then(res => res.json())
         .then(dados => {
             let innerHtml = ``;
@@ -54,7 +54,7 @@ function pegaTipos() {
 
 function pegaID() {
     const nomePesquisa = pacienteInput.value;
-    fetch(`http://localhost:3000/pacientes?nome=${nomePesquisa}`)
+    fetch(`http://localhost:3000/api/pacientes?nome=${nomePesquisa}`)
         .then(res => res.json())
         .then(dados => {
             pacienteID = dados[0].id;
@@ -66,13 +66,13 @@ function pegaID() {
 }
 
 function pegaLeituras(paciente_id,tipo_id) {
-    fetch(`http://localhost:3000/leituras/${paciente_id}/${tipo_id}`)
+    fetch(`http://localhost:3000/api/leituras/${paciente_id}/${tipo_id}`)
         .then(res => res.json())
         .then(dados => criaGrafico(dados))
 }
 
 function pegaLeiturasRecentes(id) {
-    fetch(`http://localhost:3000/leituras/recentes/${id}`)
+    fetch(`http://localhost:3000/api/leituras/recentes/${id}`)
         .then(res => res.json())
         .then(dados => {
             criaTabelaLeituras(dados);
@@ -163,7 +163,7 @@ function criaTabelaLeituras(dados) {
 }
 
 function exportaUm() {
-    fetch(`http://localhost:3000/leituras/${pacienteID}/${tipoSelect.value}`)
+    fetch(`http://localhost:3000/api/leituras/${pacienteID}/${tipoSelect.value}`)
         .then(res => {
             if (res.ok) return res.json()
             throw new Error("Nenhum paciente selecionado")
@@ -177,7 +177,7 @@ function exportaUm() {
 }
 
 function exportaTodos() {
-    fetch(`http://localhost:3000/leituras`)
+    fetch(`http://localhost:3000/api/leituras`)
         .then(res => res.json())
         .then(dados => {
             const csv = converteJSONParaCSV(dados)
