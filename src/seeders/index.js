@@ -82,13 +82,7 @@ class Seeder {
     }
 
     static async limpaCriaTudo() {
-        await db.sequelize.query('DELETE FROM "Leituras"');
-        await db.sequelize.query(`SELECT setval('"Leituras_id_seq"', 1, false)`);
-        await db.sequelize.query('DELETE FROM "Tipos_Leituras"');
-        await db.sequelize.query(`SELECT setval('"Tipos_Leituras_id_seq"', 1, false)`);
-        await db.sequelize.query('DELETE FROM "Pacientes"');
-        await db.sequelize.query(`SELECT setval('"Pacientes_id_seq"', 1, false)`);
-
+		await db.sequelize.sync({ force: true });
         await this.criaPacientes();
         await this.criaLeituras();
     }
