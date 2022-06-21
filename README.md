@@ -64,6 +64,13 @@ PORT = 3000
 ```
 
 ## Uso
+ - Docker
+Caso tenha o docker, o projeto pode ser utilizado com o comando
+```bash
+$ docker compose up
+```
+
+ - Terminal
 *Para rodar o projeto a partir do terminal, siga as instruções*
 
 ``` bash
