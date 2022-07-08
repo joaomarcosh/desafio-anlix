@@ -2,6 +2,8 @@
 const {
   Model
 } = require('sequelize');
+const crypto = require('crypto');
+
 module.exports = (sequelize, DataTypes) => {
   class Usuarios extends Model {
     /**
@@ -15,7 +17,13 @@ module.exports = (sequelize, DataTypes) => {
   }
   Usuarios.init({
     usuario: DataTypes.STRING,
-    senha: DataTypes.STRING,
+    senha: {
+      type: DataTypes.STRING,
+      set(value){
+        const senhaHash = crypto.createHash('sha256').update(value).digest('hex');
+        this.setDataValue('senha', senhaHash);
+      }
+    },
     cargo: DataTypes.STRING
   }, {
     sequelize,
