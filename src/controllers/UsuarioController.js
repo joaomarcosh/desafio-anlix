@@ -56,6 +56,16 @@ class UsuarioController {
             return res.status(500).json({erro: "Usuario não existe!"});
         }
     }
+
+    static async Login(req,res) {
+        try {
+            const token = usuarioServices.criaTokenJWT(req.user);
+            res.set('Authorization', token);
+            return res.status(200).json({mensagem: "tudo certo"});
+        } catch(erro) {
+            return res.status(500).json({erro: erro.message});
+        }
+    }
 }
 
 module.exports = UsuarioController;

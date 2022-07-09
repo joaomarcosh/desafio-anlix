@@ -2,7 +2,7 @@
 const {
   Model
 } = require('sequelize');
-const crypto = require('crypto');
+const bcrypt = require('bcrypt');
 
 module.exports = (sequelize, DataTypes) => {
   class Usuarios extends Model {
@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     senha: {
       type: DataTypes.STRING,
       set(value){
-        const senhaHash = crypto.createHash('sha256').update(value).digest('hex');
+        const senhaHash = bcrypt.hashSync(value, 12);
         this.setDataValue('senha', senhaHash);
       }
     },

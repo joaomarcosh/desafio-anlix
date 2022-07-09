@@ -1,6 +1,7 @@
 const express = require('express');
 const routes = require('./routes');
 const path = require('path');
+const { estrategiasAutenticacao } = require('./middlewares');
 
 app = express();
 

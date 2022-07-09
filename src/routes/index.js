@@ -1,12 +1,12 @@
 const { Router } = require('express');
 const path = require('path');
-
-const routes = Router();
-
 const PacienteController = require('../controllers/PacienteController');
 const TipoController = require('../controllers/TipoController');
 const LeituraController = require('../controllers/LeituraController');
 const UsuarioController = require('../controllers/UsuarioController');
+const passport = require('passport');
+
+const routes = Router();
 
 routes
     .get('/', (req,res) => {
@@ -44,5 +44,8 @@ routes
     .post('/api/usuarios', UsuarioController.criaUsuario)
     .put('/api/usuarios/:id', UsuarioController.atualizaUsuario)
     .delete('/api/usuarios/:id', UsuarioController.apagaUsuario);
+
+routes
+    .post('/login', passport.authenticate('local', { session: false }), UsuarioController.Login)
 
 module.exports = routes;
