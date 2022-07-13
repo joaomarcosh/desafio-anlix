@@ -1,7 +1,9 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+const BearerStrategy = require('passport-http-bearer').Strategy;
 const db = require('../models');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 function verificaUsuario(usuario) {
     if (!usuario) {
@@ -31,6 +33,20 @@ passport.use(
                 done(null, user);
             } catch (erro) {
                 done(erro,null);
+            }
+        }
+    )
+);
+
+passport.use(
+    new BearerStrategy(
+        async (token, done) => {
+            try {
+                const payload = jwt.verify(token, process.env.KEY);
+                const usuario = await db['Usuarios'].findByPk(payload.id);//Usuario.buscaPorId(payload.id);
+                done(null, usuario);
+            } catch (erro) {
+                done(erro);
             }
         }
     )

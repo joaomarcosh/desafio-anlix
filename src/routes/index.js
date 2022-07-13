@@ -10,7 +10,10 @@ const routes = Router();
 
 routes
     .get('/', (req,res) => {
-      res.sendFile(path.join(__dirname,'../page/index.html'))
+      res.sendFile(path.join(__dirname,'../page/login/login.html'))
+    })
+    .get('/dashboard', passport.authenticate('bearer', { session: false }), (req,res) => {
+        res.status(200).sendFile(path.join(__dirname,'../page/main/index.html'))
     });
 
 routes
