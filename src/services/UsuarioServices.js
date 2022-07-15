@@ -12,7 +12,7 @@ class UsuarioServices extends Services {
             id: usuario.id
         };
 
-        return jwt.sign(payload, process.env.KEY);
+        return jwt.sign(payload, process.env.KEY, { expiresIn: '15m' });
     }
 }
 

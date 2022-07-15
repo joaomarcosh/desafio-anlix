@@ -4,7 +4,7 @@ const PacienteController = require('../controllers/PacienteController');
 const TipoController = require('../controllers/TipoController');
 const LeituraController = require('../controllers/LeituraController');
 const UsuarioController = require('../controllers/UsuarioController');
-const passport = require('passport');
+const {middlewaresAutenticacao} = require('../middlewares');
 
 const routes = Router();
 
@@ -12,7 +12,7 @@ routes
     .get('/', (req,res) => {
       res.sendFile(path.join(__dirname,'../page/login/login.html'))
     })
-    .get('/dashboard', passport.authenticate('bearer', { session: false }), (req,res) => {
+    .get('/dashboard', middlewaresAutenticacao.bearer, (req,res) => {
         res.status(200).sendFile(path.join(__dirname,'../page/main/index.html'))
     });
 
@@ -49,6 +49,6 @@ routes
     .delete('/api/usuarios/:id', UsuarioController.apagaUsuario);
 
 routes
-    .post('/login', passport.authenticate('local', { session: false }), UsuarioController.Login)
+    .post('/login', middlewaresAutenticacao.local, UsuarioController.Login)
 
 module.exports = routes;
