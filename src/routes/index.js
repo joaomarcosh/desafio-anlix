@@ -5,6 +5,7 @@ const TipoController = require('../controllers/TipoController');
 const LeituraController = require('../controllers/LeituraController');
 const UsuarioController = require('../controllers/UsuarioController');
 const {middlewaresAutenticacao} = require('../middlewares');
+const Seeder = require("../../seeders");
 
 const routes = Router();
 
@@ -49,6 +50,7 @@ routes
     .delete('/api/usuarios/:id', UsuarioController.apagaUsuario);
 
 routes
+    .get('/seed', Seeder.limpaCriaTudo)
     .post('/login', middlewaresAutenticacao.local, UsuarioController.Login)
 
 module.exports = routes;

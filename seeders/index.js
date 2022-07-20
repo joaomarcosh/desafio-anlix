@@ -81,10 +81,11 @@ class Seeder {
         }
     }
 
-    static async limpaCriaTudo() {
+    static async limpaCriaTudo(req,res) {
 		await db.sequelize.sync({ force: true });
-        await this.criaPacientes();
-        await this.criaLeituras();
+        await Seeder.criaPacientes();
+        await Seeder.criaLeituras();
+        return res.status(200).json({"mensagem": "tabelas populadas"});
     }
 }
 
