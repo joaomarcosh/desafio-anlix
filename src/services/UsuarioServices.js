@@ -1,6 +1,8 @@
+require('dotenv/config');
 const Services = require('./Services');
 const jwt = require('jsonwebtoken');
-require('dotenv/config');
+const {randomBytes} = require('crypto');
+const whitelist = require('../redis/whitelist');
 
 class UsuarioServices extends Services {
     constructor() {
@@ -8,11 +10,16 @@ class UsuarioServices extends Services {
     }
 
     criaTokenJWT(usuario) {
-        const payload = {
-            id: usuario.id
-        };
-
+        const payload = {id: usuario.id};
         return jwt.sign(payload, process.env.KEY, { expiresIn: '15m' });
+    }
+
+    async criaTokenOpaco(usuario) {
+        const tokenOpaco = randomBytes(24).toString('hex');
+        const dataExpiracao = Date.now()+432000000; // 5 dias
+        await whitelist.adiciona(tokenOpaco, usuario.id, dataExpiracao);
+
+        return tokenOpaco;
     }
 }
 

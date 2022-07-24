@@ -1,4 +1,5 @@
 const {UsuarioServices} = require('../services');
+const blacklist = require('../redis/blacklist');
 
 const usuarioServices = new UsuarioServices();
 
@@ -57,14 +58,24 @@ class UsuarioController {
         }
     }
 
-    static async Login(req,res) {
+    static async login(req,res) {
         try {
-            const token = "Bearer " + usuarioServices.criaTokenJWT(req.user);
-            res.set('Authorization', token);
-            res.status(204).end();
-            //res.redirect(301, '/dashboard');
+            const accessToken = usuarioServices.criaTokenJWT(req.user);
+            const refreshToken = await usuarioServices.criaTokenOpaco(req.user);
+            res.set('Authorization', accessToken);
+            res.status(200).json({refreshToken});
         } catch(erro) {
             return res.status(500).json({erro: erro.message});
+        }
+    }
+
+    static async logout(req, res) {
+        try {
+            const token = req.token;
+            await blacklist.adiciona(token);
+            res.status(200).json({mensagem: "logout efetuado com succeso!"});
+        } catch (erro) {
+            res.status(500).json({erro: erro.message});
         }
     }
 }

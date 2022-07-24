@@ -25,6 +25,7 @@
     "passport-http-bearer": "^1.0.1",
     "passport-local": "^1.0.0",
     "pg": "^8.7.3",
+    "redis": "^4.2.0",
     "sequelize": "^6.20.1"
   }
 }

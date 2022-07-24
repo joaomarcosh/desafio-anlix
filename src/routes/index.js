@@ -51,6 +51,8 @@ routes
 
 routes
     .get('/seed', Seeder.limpaCriaTudo)
-    .post('/login', middlewaresAutenticacao.local, UsuarioController.Login)
+    .post('/login', middlewaresAutenticacao.local, UsuarioController.login)
+    .post('/logout', [middlewaresAutenticacao.refresh, middlewaresAutenticacao.bearer], UsuarioController.logout)
+    .post('/refresh',middlewaresAutenticacao.refresh, UsuarioController.login);
 
 module.exports = routes;
