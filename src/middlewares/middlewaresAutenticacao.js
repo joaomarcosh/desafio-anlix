@@ -1,20 +1,9 @@
 const passport = require('passport');
 const db = require('../models');
-const whitelist = require('../redis/whitelist');
-
-async function verificaRefreshToken(refreshToken) {
-    if (!refreshToken) {
-        throw new Error('Refresh token não enviado!');
-    }
-    const id = await whitelist.buscaValor(refreshToken);
-    if (!id) {
-        throw new Error('Refresh token inválido!');
-    }
-    return id;
-}
+const { RefreshToken } = require('../tokens');
 
 async function invalidaRefreshToken(refreshToken) {
-    await whitelist.apaga(refreshToken);
+    await RefreshToken.invalida(refreshToken);
 }
 
 function local(req, res, next) {
@@ -68,9 +57,9 @@ function bearer(req, res, next) {
 
 async function refresh(req, res, next) {
     try {
-        const {refreshToken} = req.body;
-        const id = await verificaRefreshToken(refreshToken);
-        await invalidaRefreshToken(refreshToken);
+        const token = req.body.refreshToken;
+        const id = await RefreshToken.verifica(token);
+        await invalidaRefreshToken(token);
         req.user = await db['Usuarios'].findByPk(id);
         return next();
     } catch (erro) {

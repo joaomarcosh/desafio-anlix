@@ -1,5 +1,5 @@
-const {UsuarioServices} = require('../services');
-const blacklist = require('../redis/blacklist');
+const { UsuarioServices } = require('../services');
+const { AccessToken, RefreshToken } = require('../tokens');
 
 const usuarioServices = new UsuarioServices();
 
@@ -60,8 +60,8 @@ class UsuarioController {
 
     static async login(req,res) {
         try {
-            const accessToken = usuarioServices.criaTokenJWT(req.user);
-            const refreshToken = await usuarioServices.criaTokenOpaco(req.user);
+            const accessToken = AccessToken.cria(req.user.id);
+            const refreshToken = await RefreshToken.cria(req.user.id);
             res.set('Authorization', accessToken);
             res.status(200).json({refreshToken});
         } catch(erro) {
@@ -72,7 +72,7 @@ class UsuarioController {
     static async logout(req, res) {
         try {
             const token = req.token;
-            await blacklist.adiciona(token);
+            await AccessToken.invalida(token);
             res.status(200).json({mensagem: "logout efetuado com succeso!"});
         } catch (erro) {
             res.status(500).json({erro: erro.message});
