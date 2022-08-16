@@ -1,6 +1,6 @@
 const db = require('../models');
 const { Op } = require('sequelize');
-const {LeituraServices} = require('../services');
+const { LeituraServices } = require('../services');
 
 const leituraServices = new LeituraServices();
 
@@ -27,7 +27,6 @@ class LeituraController {
                 )
             }
 
-            //const leituras = await db.Leituras.findAll({where});
             const leituras = await leituraServices.pegaTodosOsRegistros(where);
             return res.status(200).json(leituras);
         } catch(erro) {
@@ -38,7 +37,6 @@ class LeituraController {
     static async pegaLeitura(req,res) {
         try {
             const { id } = req.params;
-            //const leitura = await db.Leituras.findByPk(id);
             const leitura = await leituraServices.pegaUmRegistroPorID(id);
             return res.status(200).json(leitura);
         } catch(erro) {
@@ -49,7 +47,6 @@ class LeituraController {
     static async criaLeitura(req,res) {
         try {
             const novaLeitura = req.body;
-            //const leitura = await db.Leituras.create(novaLeitura);
             const leitura = await leituraServices.criaUmRegistro(novaLeitura);
             return res.status(201).json(leitura);
         } catch(erro) {
@@ -61,8 +58,6 @@ class LeituraController {
         try {
             const { id } = req.params;
             const dados = req.body;
-            //await db.Leituras.update(dados,{ where: { id:id } });
-            //const leitura = await db.Leituras.findByPk(id);
             await leituraServices.atualizaUmRegistro(id,dados);
             const leitura = await leituraServices.pegaUmRegistroPorID(id);
             return res.status(200).json(leitura);
@@ -74,8 +69,6 @@ class LeituraController {
     static async apagaLeitura(req,res) {
         try {
             const { id } = req.params;
-            //const leitura = await db.Leituras.findByPk(id);
-            //await leitura.destroy();
             await leituraServices.apagaUmRegistro(id);
             return res.status(200).json({mensagem: `leitura com id ${id} deletada!`})
         } catch(erro) {
@@ -94,29 +87,9 @@ class LeituraController {
             let condicao = "";
             if (nome) {
                 where.nome = {[Op.substring]: nome};
-                /*condicao = await db['Pacientes'].findOne({
-                    where,
-                    attributes:['id'],
-                    raw:true
-                }).then(({id}) => `WHERE paciente_id = ${id}`);*/
                 condicao = await leituraServices.pegaUmRegistroPorNome(where,['id'],true)
                     .then(({id}) => `WHERE paciente_id = ${id}`);
             }
-
-            /*const leituras = await db.sequelize.query(
-                `SELECT r.*
-                FROM "Leituras" AS r
-                JOIN (
-                    SELECT MAX(data) AS date, tipo_id, paciente_id
-                    FROM "Leituras" AS gp
-                    ${condicao}
-                    GROUP BY tipo_id, paciente_id
-                ) AS gp
-                ON r.data = gp.date
-                AND r.tipo_id = gp.tipo_id
-                ORDER BY paciente_id ASC, tipo_id ASC;`,
-                {type: db.sequelize['QueryTypes'].SELECT}
-            );*/
             const leituras = await leituraServices.pegaLeiturasRecentes(condicao);
             return res.status(200).json(leituras);
         } catch(erro) {
@@ -130,19 +103,6 @@ class LeituraController {
         try {
             const { id } = req.params;
             const condicao = `WHERE paciente_id = ${id}`;
-            /*const leituras = await db.sequelize.query(
-                `SELECT r.*
-                FROM "Leituras" AS r
-                JOIN (
-                    SELECT MAX(data) AS date, tipo_id, paciente_id
-                    FROM "Leituras" AS gp
-                    WHERE paciente_id = ${id}
-                    GROUP BY tipo_id, paciente_id
-                ) AS gp
-                ON r.data = gp.date
-                AND r.tipo_id = gp.tipo_id;`,
-                {type: db.sequelize.QueryTypes.SELECT}
-            );*/
             const leituras = await leituraServices.pegaLeiturasRecentes(condicao);
             return res.status(200).json(leituras);
         } catch(erro) {
@@ -164,10 +124,6 @@ class LeituraController {
             dataInicial ? where.data[Op.gte] = dataInicial : null;
             dataFinal ? where.data[Op.lte] = dataFinal : null;
 
-            /*const leituras = await db.Leituras.findAll({
-                where,
-                order: [['data','ASC']]
-            });*/
             const leituras = await leituraServices.pegaRegistrosPorData(where,[['data','ASC']]);
             return res.status(200).json(leituras);
         } catch(erro) {
@@ -189,11 +145,6 @@ class LeituraController {
             valorInicial ? where.valor[Op.gte] = valorInicial : null;
             valorFinal ? where.valor[Op.lte] = valorFinal : null;
 
-            /*const leitura = await db.Leituras.findAll({
-                where,
-                order: [['data','DESC']],
-                limit: 1
-            });*/
             const leitura = await leituraServices.pegaLeituraRecentesParaUmPorTipo(where,[['data','DESC']]);
             return res.status(200).json(leitura)
         } catch(erro) {

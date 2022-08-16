@@ -19,7 +19,6 @@ class PacienteController {
                     }
                 )
             }
-            //const pacientes = await db.Pacientes.findAll({where});
             const pacientes = await pacienteServices.pegaTodosOsRegistros(where);
             return res.status(200).json(pacientes);
         } catch(erro) {
@@ -30,7 +29,6 @@ class PacienteController {
     static async pegaPaciente(req,res) {
         try {
             const { id } = req.params;
-            //const paciente = await db.Pacientes.findByPk(id);
             const paciente = await pacienteServices.pegaUmRegistroPorID(id);
             return res.status(200).json(paciente);
         } catch(erro) {
@@ -41,7 +39,6 @@ class PacienteController {
     static async criaPaciente(req,res) {
         try {
             const novoPaciente = req.body;
-            //const paciente = await db.Pacientes.create(novoPaciente);
             const paciente = await pacienteServices.criaUmRegistro(novoPaciente);
             return res.status(201).json(paciente);
         } catch(erro) {
@@ -53,8 +50,6 @@ class PacienteController {
         try {
             const { id } = req.params;
             const dados = req.body;
-            //await db.Pacientes.update(dados,{ where: { id:id } });
-            //const paciente = await db.Pacientes.findByPk(id);
             await pacienteServices.atualizaUmRegistro(id,dados);
             const paciente = await pacienteServices.pegaUmRegistroPorID(id);
             return res.status(200).json(paciente);
@@ -66,8 +61,6 @@ class PacienteController {
     static async apagaPaciente(req,res) {
         try {
             const { id } = req.params;
-            //const paciente = await db.Pacientes.findByPk(id);
-            //await paciente.destroy();
             await pacienteServices.apagaUmRegistro(id);
             return res.status(200).json({mensagem: `paciente com id ${id} deletado!`})
         } catch(erro) {
