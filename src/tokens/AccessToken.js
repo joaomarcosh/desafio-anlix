@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const blacklist = require("../redis/blacklist");
+const { blacklist } = require("../redis");
 
 class AccessToken {
 

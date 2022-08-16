@@ -1,5 +1,5 @@
 const crypto = require("crypto");
-const whitelist = require("../redis/whitelist");
+const { whitelist } = require("../redis");
 
 class RefreshToken {
 

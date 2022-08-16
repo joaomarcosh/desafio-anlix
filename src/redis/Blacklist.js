@@ -1,10 +1,10 @@
-const {createHash} = require('crypto');
+const { createHash } = require('crypto');
 const jwt = require('jsonwebtoken');
 const Lista = require('./Lista');
 
 class Blacklist extends Lista {
-    constructor(prefixo) {
-        super(prefixo);
+    constructor() {
+        super('blacklist');
     }
 
     geraTokenHash(token) {
@@ -25,6 +25,4 @@ class Blacklist extends Lista {
     }
 }
 
-const blacklist = new Blacklist('blacklist');
-
-module.exports = blacklist;
+module.exports = Blacklist;

@@ -1,10 +1,7 @@
 const { Router } = require('express');
 const path = require('path');
-const PacienteController = require('../controllers/PacienteController');
-const TipoController = require('../controllers/TipoController');
-const LeituraController = require('../controllers/LeituraController');
-const UsuarioController = require('../controllers/UsuarioController');
-const {middlewaresAutenticacao} = require('../middlewares');
+const { PacienteController, TipoController, LeituraController, UsuarioController } = require('../controllers');
+const { middlewares } = require('../auth');
 const Seeder = require("../../seeders");
 
 const routes = Router();
@@ -13,7 +10,7 @@ routes
     .get('/', (req,res) => {
       res.sendFile(path.join(__dirname,'../page/login/login.html'))
     })
-    .get('/dashboard', middlewaresAutenticacao.bearer, (req,res) => {
+    .get('/dashboard', middlewares.bearer, (req,res) => {
         res.status(200).sendFile(path.join(__dirname,'../page/main/index.html'))
     });
 
@@ -51,8 +48,8 @@ routes
 
 routes
     .get('/seed', Seeder.limpaCriaTudo)
-    .post('/login', middlewaresAutenticacao.local, UsuarioController.login)
-    .post('/logout', [middlewaresAutenticacao.refresh, middlewaresAutenticacao.bearer], UsuarioController.logout)
-    .post('/refresh',middlewaresAutenticacao.refresh, UsuarioController.login);
+    .post('/login', middlewares.local, UsuarioController.login)
+    .post('/logout', [middlewares.refresh, middlewares.bearer], UsuarioController.logout)
+    .post('/refresh',middlewares.refresh, UsuarioController.login);
 
 module.exports = routes;
