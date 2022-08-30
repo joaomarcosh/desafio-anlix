@@ -1,8 +1,8 @@
 const Services = require('./Services');
 
 class UsuarioServices extends Services {
-    constructor() {
-        super('Usuarios');
+    constructor(db) {
+        super(db, 'Usuarios');
     }
 }
 

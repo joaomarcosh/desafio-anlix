@@ -1,55 +1,24 @@
-const { Router } = require('express');
-const path = require('path');
-const { PacienteController, TipoController, LeituraController, UsuarioController } = require('../controllers');
-const { middlewares } = require('../auth');
-const Seeder = require("../../seeders");
+const express = require('express');
+const pacientes = require('./pacienteRoutes');
+const tipos = require('./tipoRoutes');
+const leituras = require('./leiturasRoutes');
+const usuarios = require('./usuarioRoutes');
+const page = require('./pageRoutes');
+const seed = require('./seedRoutes');
+const path = require("path");
 
-const routes = Router();
-
-routes
-    .get('/', (req,res) => {
-      res.sendFile(path.join(__dirname,'../page/login/login.html'))
-    })
-    .get('/dashboard', middlewares.bearer, (req,res) => {
-        res.status(200).sendFile(path.join(__dirname,'../page/main/index.html'))
-    });
-
-routes
-    .get('/api/pacientes', PacienteController.pegaPacientes)
-    .get('/api/pacientes/:id', PacienteController.pegaPaciente)
-    .post('/api/pacientes', PacienteController.criaPaciente)
-    .put('/api/pacientes/:id', PacienteController.atualizaPaciente)
-    .delete('/api/pacientes/:id', PacienteController.apagaPaciente);
-
-routes
-    .get('/api/tipos', TipoController.pegaTipos)
-    .get('/api/tipos/:id', TipoController.pegaTipo)
-    .post('/api/tipos', TipoController.criaTipo)
-    .put('/api/tipos/:id', TipoController.atualizaTipo)
-    .delete('/api/tipos/:id', TipoController.apagaTipo);
-
-routes
-    .get('/api/leituras', LeituraController.pegaLeituras)
-    .get('/api/leituras/recentes/:paciente_id/:tipo_id',LeituraController.pegaLeiturasRecentesParaUmPorTipo)
-    .get('/api/leituras/recentes',LeituraController.pegaLeiturasRecentesParaTodos)
-    .get('/api/leituras/recentes/:id',LeituraController.pegaLeiturasRecentesParaUm)
-    .get('/api/leituras/:paciente_id/:tipo_id',LeituraController.pegaLeiturasParaUmPorTipo)
-    .get('/api/leituras/:id', LeituraController.pegaLeitura)
-    .post('/api/leituras', LeituraController.criaLeitura)
-    .put('/api/leituras/:id', LeituraController.atualizaLeitura)
-    .delete('/api/leituras/:id', LeituraController.apagaLeitura);
-
-routes
-    .get('/api/usuarios', UsuarioController.pegaUsuarios)
-    .get('/api/usuarios/:id', UsuarioController.pegaUsuario)
-    .post('/api/usuarios', UsuarioController.criaUsuario)
-    .put('/api/usuarios/:id', UsuarioController.atualizaUsuario)
-    .delete('/api/usuarios/:id', UsuarioController.apagaUsuario);
-
-routes
-    .get('/seed', Seeder.limpaCriaTudo)
-    .post('/login', middlewares.local, UsuarioController.login)
-    .post('/logout', [middlewares.refresh, middlewares.bearer], UsuarioController.logout)
-    .post('/refresh',middlewares.refresh, UsuarioController.login);
+function routes(app) {
+    app.use(
+        express.json(),
+        express.static(path.join(__dirname,'page/login')),
+        express.static(path.join(__dirname,'page/main')),
+        pacientes,
+        tipos,
+        leituras,
+        usuarios,
+        page,
+        seed
+    );
+}
 
 module.exports = routes;

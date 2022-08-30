@@ -1,38 +1,39 @@
 const crypto = require("crypto");
-const { whitelist } = require("../redis");
 
-class RefreshToken {
+class RefreshTokenController {
+    constructor(services) {
+        this.services = services;
+    }
 
-    static async cria(id) {
+    async cria(id) {
         const tokenOpaco = crypto.randomBytes(24).toString('hex');
         const dataExpiracao = Date.now()+432000000; // 5 dias
-        await whitelist.adiciona(tokenOpaco, id, dataExpiracao);
+        await this.services.adiciona(tokenOpaco, id, dataExpiracao);
         return tokenOpaco;
     }
 
-    static async verifica(token) {
+    async verifica(token) {
         this.verificaEnviado(token);
-        const id = await whitelist.buscaValor(token);
+        const id = await this.services.buscaValor(token);
         this.verificaValido(id);
         return id;
     }
 
-    static verificaValido(id) {
+    verificaValido(id) {
         if (!id) {
             throw new Error(`Refresh token inválido!`);
         }
     }
 
-    static verificaEnviado(token) {
+    verificaEnviado(token) {
         if (!token) {
             throw new Error(`Refresh token não enviado!`);
         }
     }
 
-    static async invalida(token) {
-        await whitelist.apaga(token);
+    async invalida(token) {
+        await this.services.apaga(token);
     }
-
 }
 
-module.exports = RefreshToken;
+module.exports = RefreshTokenController;

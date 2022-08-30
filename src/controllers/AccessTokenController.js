@@ -1,30 +1,32 @@
 const jwt = require("jsonwebtoken");
-const { blacklist } = require("../redis");
 
-class AccessToken {
+class AccessTokenController {
+    constructor(services) {
+        this.services = services;
+    }
 
-    static cria(id) {
+    cria(id) {
         const payload = { id };
         return jwt.sign(payload, process.env.KEY, { expiresIn: '15m' });
     }
 
-    static async verifica(token) {
+    async verifica(token) {
         await this.verificaNaBlacklist(token);
         const { id } = jwt.verify(token, process.env.KEY);
         return id;
     }
 
-    static async verificaNaBlacklist(token) {
-        const tokenNaBlocklist = await blacklist.contemToken(token);
-        if (tokenNaBlocklist) {
+    async verificaNaBlacklist(token) {
+        const tokenNaBlacklist = await this.services.contemToken(token);
+        if (tokenNaBlacklist) {
             throw new jwt.JsonWebTokenError(`Access token inválido por logout!`);
         }
     }
 
-    static invalida(token) {
-        return blacklist.adiciona(token);
+    invalida(token) {
+        return this.services.adiciona(token);
     }
 
 }
 
-module.exports = AccessToken;
+module.exports = AccessTokenController;

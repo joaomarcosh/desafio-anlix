@@ -1,11 +1,9 @@
 const Services = require('./Services');
 
 class TipoServices extends Services {
-    constructor() {
-        super('Tipos_Leituras');
+    constructor(db) {
+        super(db, 'Tipos_Leituras');
     }
-
-
 }
 
 module.exports = TipoServices;

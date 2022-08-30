@@ -1,33 +1,38 @@
-const db = require('../models');
+const { RegistroNaoEncontradoError } = require('../erros');
 
 class Services {
-    constructor(modelo) {
-        this.nomeDoModelo = db[modelo];
+    constructor(db, modelo) {
+        this.db = db;
+        this.nomeDoModelo = modelo;
     }
 
-    async pegaTodosOsRegistros(where = {}) {
-        return this.nomeDoModelo.findAll({where});
+    async pegaTodosOsRegistros(options = {}) {
+        return await this.db[this.nomeDoModelo].findAll(options);
     }
 
     async pegaUmRegistroPorID(id) {
-        return this.nomeDoModelo.findByPk(id);
+        const registro = await this.db[this.nomeDoModelo].findByPk(id);
+        if (registro === null) throw new RegistroNaoEncontradoError;
+        return registro;
     }
 
-    async pegaUmResgistro(condicao) {
-        return this.nomeDoModelo.findOne({condicao});
+    async pegaUmRegistro(condicao) {
+        const registro = await this.db[this.nomeDoModelo].findOne(condicao);
+        if (registro === null) throw new RegistroNaoEncontradoError;
+        return registro;
     }
 
-    async criaUmRegistro(dados) {
-        return this.nomeDoModelo.create(dados);
+    criaUmRegistro(dados) {
+        return this.db[this.nomeDoModelo].create(dados);
     }
 
     async atualizaUmRegistro(id,dados) {
-        return this.nomeDoModelo.update(dados,{where: {id: Number(id)}});
+        return await this.db[this.nomeDoModelo].update(dados,{where: {id: Number(id)}});
     }
 
     async apagaUmRegistro(id) {
         const registro = await this.pegaUmRegistroPorID(id)
-        return registro.destroy();
+        return await registro.destroy();
     }
 }
 

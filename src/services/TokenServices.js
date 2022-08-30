@@ -1,6 +1,6 @@
 const redis = require('redis');
 
-class Lista {
+class TokenServices {
     constructor(prefixo) {
         this.prefixo = prefixo;
         this.client = redis.createClient();
@@ -11,16 +11,16 @@ class Lista {
 
     async adiciona(chave, valor, dataExpiracao) {
         await this.client.set(`${this.prefixo}:${chave}`, valor);
-        await this.client.expireAt(chave, dataExpiracao);
+        await this.client.expireAt(`${this.prefixo}:${chave}`, dataExpiracao);
     }
 
     async buscaValor(chave) {
-        return this.client.get(`${this.prefixo}:${chave}`);
+        return await this.client.get(`${this.prefixo}:${chave}`);
     }
 
     async contemChave(chave) {
         const resultado = await this.client.exists(`${this.prefixo}:${chave}`);
-        return resultado === 1;
+        return !!resultado; //=== 1;
     }
 
     async apaga(chave) {
@@ -28,4 +28,4 @@ class Lista {
     }
 }
 
-module.exports = Lista;
+module.exports = TokenServices;
