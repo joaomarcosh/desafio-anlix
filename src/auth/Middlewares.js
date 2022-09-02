@@ -11,6 +11,10 @@ class Middlewares {
             'local',
             { session: false },
             (erro, usuario) => {
+                if (erro && erro.name === 'RegistroNaoEncontradoError') {
+                    return res.status(404).json({ erro: 'Usuario ou senha invalidos' });
+                }
+
                 if (erro) {
                     return res.status(500).json({ erro: erro.message });
                 }
@@ -60,10 +64,12 @@ class Middlewares {
             const token = req.body.refreshToken;
             const id = await this.refreshToken.verifica(token);
             await this.refreshToken.invalida(token);
-            req.user = await this.usuarios.pegaUmRegistroPorID(id);
+            req.user = await this.usuarios.pegaUmRegistroPorID(id, { raw: true });
             return next();
         } catch (erro) {
-            return res.status(500).json({erro: erro.message});
+            let status = 500;
+            if (erro.message === 'Refresh token inválido!') status = 400;
+            return res.status(status).json({erro: erro.message});
         }
     }
 }

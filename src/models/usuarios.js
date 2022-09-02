@@ -16,15 +16,23 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Usuarios.init({
-    usuario: DataTypes.STRING,
+    usuario: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
     senha: {
       type: DataTypes.STRING,
+      allowNull: false,
       set(value){
         const senhaHash = bcrypt.hashSync(value, 12);
         this.setDataValue('senha', senhaHash);
       }
     },
-    cargo: DataTypes.STRING
+    cargo: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    }
   }, {
     sequelize,
     modelName: 'Usuarios',

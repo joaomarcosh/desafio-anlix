@@ -19,16 +19,26 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Leituras.init({
-    paciente_id: DataTypes.INTEGER,
+    paciente_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
     data: {
       type: DataTypes.DATE,
+      allowNull: false,
       set(value){
         let realDate = new Date(value*1000);
         this.setDataValue('data', realDate.toJSON());
       }
     },
-    tipo_id: DataTypes.INTEGER,
-    valor: DataTypes.FLOAT
+    tipo_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    valor: {
+      type: DataTypes.FLOAT,
+      allowNull: false,
+    }
   }, {
     sequelize,
     modelName: 'Leituras',

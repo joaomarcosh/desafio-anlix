@@ -161,7 +161,7 @@ describe('Testes para a classe Controller:', () => {
             expect(res.status).toHaveBeenCalledTimes(1);
             expect(res.status).toHaveBeenCalledWith(200);
             expect(res.json).toHaveBeenCalledTimes(1);
-            expect(res.json).toHaveBeenCalledWith({mensagem: 'Registro com id 3 deletado!'});
+            expect(res.json).toHaveBeenCalledWith({mensagem: 'Registro com id 3 deletado'});
         });
 
         test('retorna um erro se nao encontrar um registro', async () => {
@@ -176,7 +176,7 @@ describe('Testes para a classe Controller:', () => {
             expect(res.status).toHaveBeenCalledTimes(1);
             expect(res.status).toHaveBeenCalledWith(404);
             expect(res.json).toHaveBeenCalledTimes(1);
-            expect(res.json).toHaveBeenCalledWith({ erro: 'Registro não encontrado!' });
+            expect(res.json).toHaveBeenCalledWith({ erro: 'Registro não encontrado' });
         });
 
         test('retorna um erro se o servico falhar', async () => {

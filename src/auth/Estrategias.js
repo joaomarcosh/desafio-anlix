@@ -9,7 +9,7 @@ class Estrategias {
     localStrategyCallback = async (usuario, senha, done) => {
         try {
             const user = await this.usuarios.pegaUmRegistro({
-                where: { usuario: usuario }, raw: true
+                where: { usuario: usuario }, raw: true, attributes: ['id', 'senha'],
             });
 
             if (!this.senhaValida(senha, user.senha)) return done(null, false);
@@ -23,8 +23,7 @@ class Estrategias {
     bearerStrategyCallback = async (token, done) => {
         try {
             const id = await this.accessToken.verifica(token);
-            const usuario = await this.usuarios.pegaUmRegistroPorID(id);
-
+            const usuario = await this.usuarios.pegaUmRegistroPorID(id, { raw: true });
             return done(null, usuario, { token: token });
 
         } catch (erro) {

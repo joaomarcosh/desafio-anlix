@@ -217,7 +217,7 @@ describe('Testes para a classe Middlewares', () => {
             expect(middlewares.refreshToken.invalida).toHaveBeenCalledTimes(1);
             expect(middlewares.refreshToken.invalida).toHaveBeenCalledWith('refresh-token');
             expect(middlewares.usuarios.pegaUmRegistroPorID).toHaveBeenCalledTimes(1);
-            expect(middlewares.usuarios.pegaUmRegistroPorID).toHaveBeenCalledWith(10);
+            expect(middlewares.usuarios.pegaUmRegistroPorID).toHaveBeenCalledWith(10, {raw:true});
             expect(req.user).toBe('usuario');
             expect(next).toHaveBeenCalledTimes(1);
         });

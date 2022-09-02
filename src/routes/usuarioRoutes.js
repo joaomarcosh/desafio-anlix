@@ -15,7 +15,7 @@ routes
     .put('/api/usuarios/:id', usuarioController.atualizaUm)
     .delete('/api/usuarios/:id', usuarioController.apagaUm)
     .post('/login', middlewares.local, usuarioController.login)
-    .post('/logout', [middlewares.refresh, middlewares.bearer], usuarioController.logout)
+    .post('/logout', middlewares.refresh, middlewares.bearer, usuarioController.logout)
     .post('/refresh',middlewares.refresh, usuarioController.login);
 
 module.exports = routes;

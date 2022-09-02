@@ -20,8 +20,11 @@ passport.use(
 );
 
 passport.use(
+    'bearer',
     new BearerStrategy(
-        'bearer',
+        {
+            session: false,
+        },
         estrategias.bearerStrategyCallback
     ),
 );

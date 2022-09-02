@@ -7,7 +7,9 @@ class Services {
     }
 
     async pegaTodosOsRegistros(options = {}) {
-        return await this.db[this.nomeDoModelo].findAll(options);
+        const registros =  await this.db[this.nomeDoModelo].findAll(options);
+        if (registros.length === 0) throw new RegistroNaoEncontradoError;
+        return registros;
     }
 
     async pegaUmRegistroPorID(id) {
@@ -23,6 +25,8 @@ class Services {
     }
 
     criaUmRegistro(dados) {
+        if (dados.length > 1) return this.db[this.nomeDoModelo].bulkCreate(dados);
+        if (dados[0]) dados = dados[0];
         return this.db[this.nomeDoModelo].create(dados);
     }
 

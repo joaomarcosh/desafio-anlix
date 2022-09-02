@@ -12,12 +12,24 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Pacientes.init({
-    nome: DataTypes.STRING,
+    nome: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     idade: DataTypes.INTEGER,
-    cpf: DataTypes.STRING,
-    rg: DataTypes.STRING,
+    cpf: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
+    rg: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
     data_nasc: {
       type: DataTypes.DATEONLY,
+      allowNull: false,
       set(value){
         let splitValue = value.split('\/');
         this.setDataValue('data_nasc', `${splitValue[2]}-${splitValue[1]}-${splitValue[0]}`);
@@ -29,11 +41,16 @@ module.exports = (sequelize, DataTypes) => {
     pai: DataTypes.STRING,
     email:  {
       type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
       validate: {
         isEmail: true
       }
     },
-    senha: DataTypes.STRING,
+    senha: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     cep: DataTypes.STRING,
     endereco: DataTypes.STRING,
     numero: DataTypes.INTEGER,
@@ -44,7 +61,10 @@ module.exports = (sequelize, DataTypes) => {
     celular: DataTypes.STRING,
     altura: DataTypes.STRING,
     peso: DataTypes.INTEGER,
-    tipo_sanguineo: DataTypes.STRING,
+    tipo_sanguineo: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     cor: DataTypes.STRING
   }, {
     sequelize,

@@ -16,7 +16,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Tipos_Leituras.init({
-    descr_tipo: DataTypes.STRING
+    descr_tipo: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
   }, {
     sequelize,
     modelName: 'Tipos_Leituras',

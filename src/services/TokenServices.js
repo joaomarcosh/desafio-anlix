@@ -1,12 +1,9 @@
-const redis = require('redis');
+const redisClientSingleton = require('../redis');
 
 class TokenServices {
     constructor(prefixo) {
         this.prefixo = prefixo;
-        this.client = redis.createClient();
-        (async () => {
-            await this.client.connect();
-        })();
+        this.client = new redisClientSingleton();
     }
 
     async adiciona(chave, valor, dataExpiracao) {

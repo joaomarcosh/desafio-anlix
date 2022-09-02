@@ -31,6 +31,8 @@
     "sequelize": "^6.20.1"
   },
   "jest": {
+    "globalSetup": "<rootDir>/setup.js",
+    "globalTeardown": "<rootDir>/teardown.js",
     "coverageProvider": "v8",
     "collectCoverageFrom": [
       "**/*.{js,jsx}",

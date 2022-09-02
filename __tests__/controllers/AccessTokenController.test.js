@@ -25,7 +25,7 @@ describe('Testes para a classe AccessTokenController:', () => {
             const retorno = token.cria(10);
 
             expect(jwt.sign).toHaveBeenCalledTimes(1);
-            expect(jwt.sign).toHaveBeenCalledWith({id: 10}, undefined, {expiresIn: '15m'});
+            expect(jwt.sign).toHaveBeenCalledWith({id: 10}, expect.any(String), {expiresIn: '15m'});
             expect(retorno).toBe('retorno');
         });
 
@@ -48,7 +48,7 @@ describe('Testes para a classe AccessTokenController:', () => {
             expect(token.verificaNaBlacklist).toHaveBeenCalledTimes(1);
             expect(token.verificaNaBlacklist).toHaveBeenCalledWith('token');
             expect(jwt.verify).toHaveBeenCalledTimes(1);
-            expect(jwt.verify).toHaveBeenCalledWith('token', undefined);
+            expect(jwt.verify).toHaveBeenCalledWith('token', expect.any(String));
             expect(retorno).toBe(10);
         });
 

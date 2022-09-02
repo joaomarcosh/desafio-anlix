@@ -1,6 +1,7 @@
 const Services = require('./Services');
 const PacienteServices = require('./PacienteServices');
 const {Op} = require("sequelize");
+const { RegistroNaoEncontradoError } = require('../erros');
 
 class LeituraServices extends Services {
     constructor(db) {
@@ -9,7 +10,7 @@ class LeituraServices extends Services {
     }
 
     async pegaLeiturasRecentes(condicao) {
-        return await this.db.sequelize.query(
+        const registros = await this.db.sequelize.query(
             `SELECT r.*
             FROM "Leituras" AS r
             JOIN (
@@ -23,6 +24,8 @@ class LeituraServices extends Services {
             ORDER BY paciente_id ASC, tipo_id ASC;`,
             {type: this.db.sequelize['QueryTypes'].SELECT}
         );
+        if (registros.length === 0) throw new RegistroNaoEncontradoError;
+        return registros;
     }
 
     async setCondicao(params, query) {

@@ -29,7 +29,7 @@ describe('Testes para a classe Estrategias:', () => {
 
             expect(estrategias.usuarios.pegaUmRegistro).toHaveBeenCalledTimes(1);
             expect(estrategias.usuarios.pegaUmRegistro).toHaveBeenCalledWith({
-                where: { usuario: 'usuario' }, raw: true,
+                where: { usuario: 'usuario' }, raw: true, attributes: ['id', 'senha'],
             });
             expect(estrategias.senhaValida).toHaveBeenCalledTimes(1);
             expect(estrategias.senhaValida).toHaveBeenCalledWith('senha', 'senha');
@@ -48,7 +48,7 @@ describe('Testes para a classe Estrategias:', () => {
 
             expect(estrategias.usuarios.pegaUmRegistro).toHaveBeenCalledTimes(1);
             expect(estrategias.usuarios.pegaUmRegistro).toHaveBeenCalledWith({
-                where: { usuario: 'usuario' }, raw: true,
+                where: { usuario: 'usuario' }, raw: true, attributes: ['id', 'senha'],
             });
             expect(estrategias.senhaValida).toHaveBeenCalledTimes(1);
             expect(estrategias.senhaValida).toHaveBeenCalledWith('senha-invalida', 'senha');
@@ -80,7 +80,7 @@ describe('Testes para a classe Estrategias:', () => {
             expect(estrategias.accessToken.verifica).toHaveBeenCalledTimes(1);
             expect(estrategias.accessToken.verifica).toHaveBeenCalledWith('bearer-token');
             expect(estrategias.usuarios.pegaUmRegistroPorID).toHaveBeenCalledTimes(1);
-            expect(estrategias.usuarios.pegaUmRegistroPorID).toHaveBeenCalledWith(10);
+            expect(estrategias.usuarios.pegaUmRegistroPorID).toHaveBeenCalledWith(10, {raw:true});
             expect(done).toHaveBeenCalledTimes(1);
             expect(done).toHaveBeenCalledWith(null, 'usuario', { token: 'bearer-token' });
         });

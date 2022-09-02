@@ -14,7 +14,9 @@ class LeituraController extends Controller {
             const leituras = await this.services.pegaTodosOsRegistros(options);
             return res.status(200).json(leituras);
         } catch(erro) {
-            return res.status(500).json({erro: erro.message});
+            let status = 500;
+            if (erro.name === "RegistroNaoEncontradoError") status = 404;
+            return res.status(status).json({erro: erro.message});
         }
     }
 
@@ -31,7 +33,9 @@ class LeituraController extends Controller {
             const leituras = await this.services.pegaLeiturasRecentes(condicao);
             return res.status(200).json(leituras);
         } catch(erro) {
-            return res.status(500).json({erro: erro.message});
+            let status = 500;
+            if (erro.name === "RegistroNaoEncontradoError") status = 404;
+            return res.status(status).json({erro: erro.message});
         }
     }
 
@@ -44,7 +48,9 @@ class LeituraController extends Controller {
             const leituras = await this.services.pegaTodosOsRegistros(options);
             return res.status(200).json(leituras);
         } catch(erro) {
-            return res.status(500).json({erro: erro.message});
+            let status = 500;
+            if (erro.name === "RegistroNaoEncontradoError") status = 404;
+            return res.status(status).json({erro: erro.message});
         }
     }
 }
