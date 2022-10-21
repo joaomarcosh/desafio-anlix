@@ -13,12 +13,16 @@ button.addEventListener('click',() => {
             "senha": senha.value
         })
     }).then(res => {
-        if (res.status === 204) {
+        if (res.status === 200) {
             fetch(`http://localhost:3000/dashboard`,{
                 method: 'GET',
                 headers: {
                     'Authorization': res.headers.get('Authorization')
                 },
+            }).then(resp => {
+                if (resp.redirected) {
+                    window.location.assign(resp.url)
+                }
             });
         }
     });

@@ -11,7 +11,7 @@ class UsuarioController extends Controller {
         try {
             const accessToken = this.accessToken.cria(req.user.id);
             const refreshToken = await this.refreshToken.cria(req.user.id);
-            res.set('Authorization', accessToken);
+            res.set('Authorization', 'Bearer ' + accessToken);
             res.status(200).json({refreshToken});
         } catch(erro) {
             return res.status(500).json({erro: erro.message});

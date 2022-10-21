@@ -12,7 +12,7 @@ routes
         res.sendFile(path.join(__dirname,'../page/login/login.html'))
     })
     .get('/dashboard', middlewares.bearer, (req,res) => {
-        res.status(200).sendFile(path.join(__dirname,'../page/main/index.html'))
+        res.redirect('http://localhost:3000/dashboard.html')
     });
 
 module.exports = routes;

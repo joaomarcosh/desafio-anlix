@@ -10,7 +10,7 @@ class LeituraController extends Controller {
     pegaTodos = async (req,res) => {
         try {
             const condicao = await this.services.setCondicao(req.params, req.query);
-            const options = { where: condicao };
+            const options = { where: condicao, order: [['data','ASC']] };
             const leituras = await this.services.pegaTodosOsRegistros(options);
             return res.status(200).json(leituras);
         } catch(erro) {
