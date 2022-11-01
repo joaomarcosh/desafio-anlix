@@ -17,7 +17,7 @@ Este projeto foi desenvolvido com Node.js para implementar uma base de dados Pos
 7. [Endpoints](#endpoints)
 
 ## Requisitos
-Para rodar este projeto é necessário ter instalados o **nodejs**, **npm** e algum banco de dados entre **PotgreSQL**, **MariaDB**, **MySQL** e **SQLite**.
+Para rodar este projeto é necessário ter instalados o **nodejs**, **npm** e algum banco de dados entre **PotgreSQL**, **MariaDB**, **MySQL** e **SQLite**. É possível também rodar através do **docker compose**.
 
 ## Instalação
 - Repositório Git
@@ -31,6 +31,7 @@ $ git clone https://github.com/joaomarcosh/desafio-anlix
 $ cd desafio-anlix
 $ npm install
 ```
+O comando *install* não é necessário se decidir rodar o projeto com o docker.
 
 ## Configuração
 *No backend, temos que criar um banco de dados para a nossa aplicação, assim como configurar o arquivo ```.env```.* 
@@ -54,6 +55,7 @@ $ CREATE DATABASE <nome_do_banco>;
 
 - Configure o arquivo ```.env```
   *Adicione as informações necessárias para o backend rodar*
+  **Não é necessario caso use o docker*
 ``` text
 DB_username = <nome_usuario>
 DB_password = <senha>
@@ -77,13 +79,9 @@ $ docker compose up
 $ node src/server.js
 ```
 
-Para criar e popular as tabelas, use o argumento ```-S```
+Para criar e popular as tabelas, acesse o endpoint ```/seed```
 
-```bash
-$ node src/server.js -S
-```
-
-*Por fim, abra a URL ```localhost:PORT```, onde ```PORT``` é a porta definida no arquivo ```.env``` (padrão 3000), no browser de escolha.*
+*Por fim, abra a URL ```localhost:PORT/dashboard.html```, onde ```PORT``` é a porta definida no arquivo ```.env``` (padrão 3000), no browser de escolha.*
 
 ## Arquitetura
 - O banco de dados conta com três tabelas: **Pacientes**, **Leituras** e **Tipos_Leituras**. As tabelas **Pacientes** e **Tipos_Leituras** possuem uma relação one-to-many com a tabela **Leituras**, de forma que um paciente e um tipo de leitura pode possuir n leituras, e uma leitura só pode estar associada a um único paciente e um único tipo de leitura;

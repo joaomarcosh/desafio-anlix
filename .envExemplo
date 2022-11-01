@@ -1,6 +1,6 @@
-DB_username = 
-DB_password = 
-DB_database = 
+DB_username = anlix
+DB_password = 123
+DB_database = anlix
 DB_host = 127.0.0.1
 DB_dialect = postgres
 PORT = 3000
