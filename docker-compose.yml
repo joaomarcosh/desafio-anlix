@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     image: nodejs
     container_name: nodejs
-    restart: unless-stopped
+    restart: always
     env_file: .env
     environment:
       - DB_username=$DB_username
@@ -20,16 +20,19 @@ services:
       - "3000:3000"
     depends_on:
       - db
+      - redis
     volumes:
       - .:/home/node/app
       - node_modules:/home/node/app/node_modules
     networks:
       - app-network
+    links:
+      - redis
 
   db:
-    image: postgres
+    image: postgres:alpine
     container_name: db
-    restart: unless-stopped
+    restart: always
     env_file: .env
     environment:
       - POSTGRES_USER=$DB_username
@@ -41,6 +44,17 @@ services:
       - dbdata:/var/lib/postgresql/data
     networks:
       - app-network  
+      
+  redis:
+    image: redis:alpine
+    container_name: redis
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:     
+      - redisdata:/var/lib/redis/data
+    networks:
+      - app-network  
 
 networks:
   app-network:
@@ -48,4 +62,5 @@ networks:
 
 volumes:
   dbdata:
+  redisdata:
   node_modules:
